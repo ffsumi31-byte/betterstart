@@ -1,0 +1,15 @@
+FORGE3D DESIGNER AI 1.4.2 — PROMPT ROUTING FIX
+
+This package has package.json at the archive root. It fixes main-subject selection across many object families, not just the human/flag case.
+
+1. Download and extract the ZIP.
+2. Open the extracted folder. You should see package.json, index.html, build.mjs, server.mjs, src, public, tests and render.yaml together.
+3. In the GitHub repository connected to Render, choose Add file -> Upload files.
+4. Upload the CONTENTS of this folder, not the ZIP file and not an extra enclosing folder. Overwrite same-named files, including src/main.js, src/modeler.js, src/brain.js, tests and package.json.
+5. Commit to the same branch Render deploys. Make sure package.json is visible on the repository's main page next to index.html.
+6. Keep Render Build Command = `npm install` and Start Command = `npm start`.
+7. Let auto-deploy run, or choose Manual Deploy -> Deploy latest commit.
+
+Do not change Root Directory if package.json is directly visible on the repository's main page. If older extra project files remain, they usually do not matter as long as the files listed above are replaced correctly.
+
+Verification: 33 logic tests passed; 34 varied subject/accessory prompts passed the routing stress suite. The container could not reach npmjs.org, so a real Three.js production build and live Render deployment were not verified here. Render must install the official `three` dependency during deployment.

@@ -1,0 +1,19 @@
+{
+  "name": "forge3d-studio",
+  "version": "1.5.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && node server.mjs",
+    "build": "node build.mjs",
+    "preview": "node server.mjs",
+    "test": "node --test tests/deploy.test.js tests/modeler.test.js tests/brain.test.js tests/gemini.test.js",
+    "start": "node build.mjs && node server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  }
+}

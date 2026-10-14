@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f5f2" />
+    <meta name="description" content="Forge3D Studio — prompt-driven, low-poly 3D assets for Roblox, made right in your browser." />
+    <title>Forge3D Studio — Low-poly asset builder</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three/build/three.module.js",
+          "three/addons/": "/vendor/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Forge3D Studio home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>forge<span class="brand-light">3d</span><small>STUDIO</small></span>
+        </a>
+        <div class="topbar-center"><span class="status-dot"></span> 8-pass design pipeline <span class="topbar-separator">/</span> Gemini or local AI optional</div>
+        <div class="topbar-actions">
+          <button class="top-link" id="help-btn" type="button">How it works <span>↗</span></button>
+          <div class="avatar">F</div>
+        </div>
+      </header>
+
+      <div class="app-layout">
+        <aside class="sidebar">
+          <div class="side-label">WORKSPACE</div>
+          <button class="nav-item active" data-view="create"><span class="nav-icon">✳</span> Create asset <span class="nav-count">01</span></button>
+          <button class="nav-item" data-view="library"><span class="nav-icon">▦</span> Local library</button>
+          <button class="nav-item" data-view="learn"><span class="nav-icon">⌘</span> Teach the model</button>
+          <div class="sidebar-bottom">
+            <div class="limit-card"><div class="limit-title"><span>POLY BUDGET</span><span id="sidebar-tris">under 500</span></div><div class="budget-track"><span id="budget-fill"></span></div><p>Made for lightweight game assets.</p></div>
+            <div class="sidebar-note"><span class="tiny-spark">✦</span><div><b>Local-first</b><p>Your prompt and image stay in this browser.</p></div></div>
+            <div class="side-version">FORGE3D <span>v1.0</span></div>
+          </div>
+        </aside>
+
+        <main class="main-content">
+          <section class="view view-create active" id="view-create">
+            <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> LOW-POLY LAB <span class="eyebrow-tag">BETA</span></div><h1>Make something<br /><em>game-ready.</em></h1><p class="heading-copy">Describe it. Shape it. Take it into Roblox.</p></div><div class="heading-side"><div class="mini-stat"><span class="mini-stat-icon">◈</span><div><b>≤ 500</b><small>triangles target</small></div></div><div class="mini-stat"><span class="mini-stat-icon">↗</span><div><b>3 formats</b><small>GLB · OBJ · Lua</small></div></div></div></div>
+
+            <div class="workspace-grid">
+              <section class="control-column">
+                <div class="panel prompt-panel">
+                  <div class="panel-heading"><div><span class="step-number">01</span><h2>Describe your asset</h2></div><span class="panel-hint">TEXT PROMPT</span></div>
+                  <label for="prompt" class="input-label">What are we building?</label>
+                  <textarea id="prompt" rows="4" maxlength="700" placeholder="A tiny purple dragon with a sharp angular silhouette, plated chest, geometric wings, bright cyan eyes, chunky planted feet, and a segmented tail. Premium low-poly Roblox asset with clean planes and restrained accents.">A tiny purple dragon with a sharp angular silhouette, plated chest, geometric wings, bright cyan eyes, chunky planted feet, and a segmented tail. Premium low-poly Roblox asset with clean planes and restrained accents.</textarea>
+                  <div class="prompt-footer"><span><span class="sparkle">✦</span> Silhouette first · large forms · restrained details</span><span id="char-count">148 / 700</span></div>
+                  <div class="example-row"><span class="examples-label">TRY</span><button class="example-chip" data-prompt="A low-poly robot avatar with a mint body, square head and cyan visor">Robot</button><button class="example-chip" data-prompt="A tiny purple dragon with angular wings, plated chest, bright cyan eyes and a three-link tail">Dragon</button><button class="example-chip" data-prompt="A stylized low-poly horse with blocky legs and a bright purple mane">Horse</button><button class="example-chip" data-prompt="A simple fantasy sword with a green blade and dark handle">Sword</button></div>
+                  <div class="upload-zone" id="drop-zone"><input id="image-input" type="file" accept="image/png,image/jpeg,image/webp" hidden /><div class="upload-icon">↥</div><div class="upload-copy"><b id="upload-title">Add a reference image <span>(optional)</span></b><p id="upload-subtitle">Drop an image here or <button type="button" id="browse-btn">browse files</button></p></div><div class="upload-preview" id="upload-preview" hidden></div><button id="remove-image" class="remove-image" type="button" aria-label="Remove image" hidden>×</button></div>
+                  <p class="image-note">Reference images guide the palette and can be read by Gemini or your optional local vision model. Online reference research runs during the design pipeline.</p>
+                  <div class="divider-line"></div>
+                  <div class="settings-heading"><div><span class="step-number">02</span><h2>Model settings</h2></div><button id="reset-settings" class="text-button" type="button">Reset</button></div>
+                  <div class="settings-grid">
+                    <label class="field-label">Asset type<select id="asset-type"><option value="auto">Auto-detect</option><option value="character">Character / avatar</option><option value="creature">Creature / animal</option><option value="weapon">Weapon</option><option value="prop">Prop / object</option></select></label>
+                    <label class="field-label">Shape style<select id="shape-style"><option value="premium" selected>Premium hard-surface</option><option value="minimal">Minimal blockout</option><option value="faceted">Faceted low-poly</option><option value="soft">Chunky &amp; rounded</option></select></label>
+                  </div>
+                  <div class="ai-brain" id="ai-brain">
+                    <label class="field-label">AI brain<select id="ai-provider"><option value="off">Built-in rules (no AI)</option><option value="gemini">Google Gemini (API key)</option><option value="ollama">Local Ollama</option></select></label>
+                    <div class="gemini-models" id="gemini-models-row" hidden>
+                      <label class="field-label">Prompt understanding<select id="gm-understand" data-role="understand"></select></label>
+                      <label class="field-label">Image understanding<select id="gm-vision" data-role="vision"></select></label>
+                      <label class="field-label">Building (part plan)<select id="gm-build" data-role="build"></select></label>
+                      <p class="gemini-note" id="gemini-run-note">Add your Gemini API key under <b>Teach the model</b> to switch this on.</p>
+                    </div>
+                  </div>
+                  <div class="budget-setting"><div class="budget-setting-top"><label for="triangle-budget">Triangle budget</label><span><b id="triangle-budget-value">500</b> <small>max tris</small></span></div><input id="triangle-budget" type="range" min="100" max="500" step="25" value="500" /><div class="range-labels"><span>Lightweight · 100</span><span>More shape · 500</span></div></div>
+                  <button class="generate-button" id="generate-btn" type="button"><span class="generate-icon">✦</span><span id="generate-label">Generate asset</span><span class="button-shortcut">↵</span></button>
+                  <p class="generation-note"><span class="status-dot"></span> Runs in your browser · AI is optional · Your Gemini key stays on this device</p>
+                </div>
+              </section>
+
+              <section class="preview-column">
+                <div class="preview-panel">
+                  <div class="preview-top"><div><div class="preview-title-line"><span class="live-dot"></span><h2>3D viewport</h2></div><p id="model-subtitle">Dragon · low-poly preview</p></div><div class="viewport-actions"><button class="icon-button" id="reset-camera" title="Reset camera" aria-label="Reset camera">⟳</button><button class="icon-button" id="grid-toggle" title="Toggle grid" aria-label="Toggle grid">▦</button><button class="icon-button" id="fullscreen-btn" title="Fullscreen preview" aria-label="Fullscreen preview">⛶</button></div></div>
+                  <div class="viewport-wrap" id="viewport-wrap"><div id="viewport"></div><div class="viewport-watermark">F3D <span>•</span> LIVE PREVIEW</div><div class="viewport-bottom-left"><span class="axis-badge">Y ↑</span><span class="axis-badge">X ↔</span><span class="axis-badge">Z ◉</span></div><div class="viewport-help">Drag to orbit <span>·</span> Scroll to zoom</div><div class="empty-overlay" id="loading-overlay" hidden><div class="loader"></div><b>Building your asset</b><span>Assembling low-poly parts…</span></div></div>
+                  <div class="preview-toolbar"><div class="model-name"><span class="model-file-icon">◩</span><span><b id="model-name">untitled_dragon</b><small id="model-status">Ready to export</small></span></div><div class="toolbar-buttons"><button class="secondary-button" id="randomize-btn" type="button">↻ Remix</button><button class="primary-small" id="download-glb" type="button">Export GLB <span>↓</span></button></div></div>
+                </div>
+
+                <div class="metrics-grid"><div class="metric-card"><span class="metric-icon mint">△</span><div><small>TRIANGLES</small><b id="metric-tris">—</b><span id="metric-tris-caption">of 500 max</span></div><div class="metric-mini-bar"><span id="tris-bar"></span></div></div><div class="metric-card"><span class="metric-icon lilac">◫</span><div><small>PARTS</small><b id="metric-parts">—</b><span>mesh components</span></div></div><div class="metric-card"><span class="metric-icon peach">◉</span><div><small>VERTICES</small><b id="metric-verts">—</b><span>geometry points</span></div></div></div>
+                <section class="process-panel" aria-labelledby="process-title">
+                  <div class="process-panel-head"><div><span class="eyebrow"><span class="eyebrow-line"></span> DESIGNER WORKFLOW</span><h2 id="process-title">Eight-pass quality pipeline</h2><p>Research → concept → blockout → geometry audit → detail pass → clean rebuild → final QA.</p></div><span class="process-pill" id="pipeline-summary">READY</span></div>
+                  <div class="process-body">
+                    <ol class="pipeline-list" id="pipeline-list">
+                      <li data-stage="1"><span class="pipeline-index">01</span><div class="pipeline-step-copy"><b>Read the prompt</b><small class="pipeline-note">Find the object, style, proportions and intended use.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="2"><span class="pipeline-index">02</span><div class="pipeline-step-copy"><b>Research references</b><small class="pipeline-note">Search public Wikipedia and Wikimedia references.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="3"><span class="pipeline-index">03</span><div class="pipeline-step-copy"><b>Draw cartoon concept</b><small class="pipeline-note">Make a quick silhouette study before 3D.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="4"><span class="pipeline-index">04</span><div class="pipeline-step-copy"><b>Build silhouette blockout</b><small class="pipeline-note">Create the big masses before detail.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="5"><span class="pipeline-index">05</span><div class="pipeline-step-copy"><b>Inspect the geometry</b><small class="pipeline-note">Check triangle budget, bounds and invalid vertices.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="6"><span class="pipeline-index">06</span><div class="pipeline-step-copy"><b>Add purposeful detail</b><small class="pipeline-note">Armor, panels, silhouette accents and feature colors.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="7"><span class="pipeline-index">07</span><div class="pipeline-step-copy"><b>Rebuild clean</b><small class="pipeline-note">Rebuild from the reviewed blueprint with the final budget.</small></div><span class="pipeline-state">Queued</span></li>
+                      <li data-stage="8"><span class="pipeline-index">08</span><div class="pipeline-step-copy"><b>Final quality check</b><small class="pipeline-note">Verify the final exportable mesh and show warnings.</small></div><span class="pipeline-state">Queued</span></li>
+                    </ol>
+                    <div class="concept-column"><div class="concept-frame"><img id="concept-art" alt="Cartoon concept study will appear here" /><span class="concept-label">CARTOON CONCEPT</span></div><div class="brief-card"><div class="brief-card-head"><b>Design brief</b><span id="brief-engine">RULE-BASED</span></div><dl id="design-brief"><dt>Subject</dt><dd>Awaiting prompt</dd><dt>Silhouette</dt><dd>Primary shapes before details.</dd><dt>Design intent</dt><dd>Clear game-ready form.</dd></dl></div></div>
+                  </div>
+                  <div class="qa-report" id="qa-report" role="status"><span class="qa-icon">✓</span><div><b>Final audit is waiting</b><p>Every model runs through the same eight stages before it is offered for export.</p></div></div>
+                  <div class="research-sources" id="research-sources"><div class="research-empty">Research sources appear here after generation. The site uses public reference search and displays source links.</div></div>
+                </section>
+
+                <div class="export-panel"><div class="export-heading"><div><h2>Export for your workflow</h2><p>Take the model into your favorite 3D tool.</p></div><span class="export-ready"><span class="status-dot"></span> READY</span></div><div class="export-options"><button class="export-option" id="download-obj" type="button"><span class="file-badge obj-badge">OBJ</span><span><b>Wavefront OBJ</b><small>Mesh exchange · Blender</small></span><span class="export-arrow">↓</span></button><button class="export-option" id="download-lua" type="button"><span class="file-badge lua-badge">LUA</span><span><b>Roblox rig script</b><small>R6-style block rig · Studio</small></span><span class="export-arrow">↓</span></button></div><div class="export-footnote"><span>ⓘ</span> GLB preserves mesh colors. The Lua script generates a simple Roblox rig; it does not automatically import the GLB mesh.</div></div>
+              </section>
+            </div>
+          </section>
+
+          <section class="view" id="view-library"><div class="simple-page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WORKSPACE</div><h1>Local <em>library.</em></h1><p>Recent prompts are saved only in this browser.</p></div><div id="library-list" class="library-list"></div><div class="library-actions"><button id="clear-library" class="secondary-button" type="button">Clear local history</button><button class="primary-small go-create" type="button">Create new asset ↗</button></div></section>
+
+          <section class="view" id="view-learn"><div class="simple-page-heading"><div class="eyebrow"><span class="eyebrow-line"></span> LOCAL FEEDBACK</div><h1>Teach it <em>your style.</em></h1><p>Save preferences and use them as design hints on future generations.</p></div><div class="learn-card"><div class="learn-illustration">✦</div><div><h2>Build your style memory</h2><p>Forge3D on Vercel/Render runs a procedural modeler in the browser. This panel saves explicit style preferences locally; it doesn't train a neural network. For each new model, it can include your preferences in the prompt used by the generator.</p></div></div>
+<div class="local-ai-card gemini-card" id="gemini-card"><div class="local-ai-heading"><div><span class="eyebrow"><span class="eyebrow-line"></span> CLOUD AI</span><h2>Connect Google Gemini</h2><p>Use the Gemini API to understand your prompt, read reference images and write the part plan. Pick a different model for each job in the <b>Create</b> tab under <b>AI brain</b>.</p></div><span class="local-ai-badge">GEMINI</span></div><form id="gemini-form" class="local-ai-form" autocomplete="off"><label class="field-label" for="gemini-key">Gemini API key<input id="gemini-key" type="password" placeholder="Paste your key from Google AI Studio" spellcheck="false" autocomplete="off" /></label><label class="ai-enabled-row"><input type="checkbox" id="gemini-remember" /><span><b>Remember the key on this device</b><small>Off = the key is forgotten when you close the tab. On = saved in this browser only.</small></span></label><label class="ai-enabled-row"><input type="checkbox" id="gemini-enabled" /><span><b>Use Gemini during generation</b><small>Same switch as the AI brain menu in the Create tab.</small></span></label><div class="form-actions"><span id="gemini-status">Not connected · no key entered</span><button class="secondary-button" type="button" id="gemini-load-models">Load my models</button><button class="secondary-button" type="button" id="gemini-test">Test Gemini</button><button class="primary-small" type="submit">Save</button></div></form><div class="local-ai-install"><b>Get a key</b><p>Create a free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/apikey</a>. The key is sent only to Google, straight from your browser. Anyone using this website enters their own key, and you should never paste a key into the source code. Gemini plans geometry as a part list; Forge3D still builds, checks and caps the mesh itself, so this is not a text-to-3D neural mesh generator.</p></div></div>
+<div class="local-ai-card"><div class="local-ai-heading"><div><span class="eyebrow"><span class="eyebrow-line"></span> OPTIONAL ACTUAL MODEL</span><h2>Connect a local AI brain</h2><p>Use a model running on your own computer to interpret prompts and reference images. No paid API key. Geometry remains constrained to game-asset rules.</p></div><span class="local-ai-badge">OLLAMA</span></div><form id="local-ai-form" class="local-ai-form"><label class="field-label" for="ollama-endpoint">Ollama endpoint<input id="ollama-endpoint" type="url" value="http://localhost:11434" placeholder="http://localhost:11434" /></label><label class="field-label" for="ollama-model">Model name<input id="ollama-model" type="text" value="qwen2.5:3b" placeholder="qwen2.5:3b" /></label><label class="ai-enabled-row"><input type="checkbox" id="ollama-enabled" /><span><b>Use local AI during generation</b><small>When enabled, Forge3D asks the local model for a custom design blueprint.</small></span></label><div class="form-actions"><span id="ollama-status">Not connected · local AI disabled</span><button class="secondary-button" type="button" id="test-ollama">Test connection</button><button class="primary-small" type="submit">Save AI settings</button></div></form><div class="local-ai-install"><b>One-time setup on your PC</b><code>ollama pull qwen2.5:3b</code><p>For image understanding, use a vision model such as <code>qwen2.5vl:3b</code>. Ollama must be running and allow the browser origin. On Windows, set <code>OLLAMA_ORIGINS=*</code> in the Ollama environment, then restart Ollama. This is local model inference; it is not neural mesh generation by itself.</p></div></div><form id="memory-form" class="memory-form"><label for="memory-input">What should Forge3D remember?</label><textarea id="memory-input" rows="3" maxlength="250" placeholder="e.g. I like oversized heads, simple silhouettes and two accent colors."></textarea><div class="form-actions"><span id="memory-status">Saved only on this device.</span><button class="primary-small" type="submit">Save preference ↗</button></div></form><div class="memory-list-wrap"><div class="memory-list-heading"><h2>Saved preferences</h2><button id="clear-memory" class="text-button" type="button">Clear all</button></div><div id="memory-list" class="memory-list"></div></div></section>
+
+          <footer class="footer"><span>FORGE3D STUDIO <span class="footer-dot">●</span> BUILT FOR GAME ASSETS</span><span>Keep it simple. Keep it playable.</span></footer>
+        </main>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <dialog id="help-dialog" class="help-dialog"><div class="dialog-top"><span class="brand-mini">✳ FORGE3D</span><button id="close-help" class="icon-button" aria-label="Close help">×</button></div><h2>A lightweight modeling workbench.</h2><p>Describe an asset and Forge3D runs an eight-pass design workflow: prompt analysis, public reference research, cartoon concept, blockout, geometry audit, detail pass, clean rebuild and final QA. Optional Ollama uses a real local model to help write a bespoke blueprint. Geometry is assembled by a constrained low-poly modeling grammar, then exported as GLB, OBJ or a Roblox Lua starter rig.</p><div class="help-grid"><div><b>01 / Prompt</b><span>Name the silhouette, materials and proportions.</span></div><div><b>02 / Inspect</b><span>Orbit the model and check the triangle count.</span></div><div><b>03 / Export</b><span>Download GLB, OBJ or the rig scaffold.</span></div></div><p class="disclaimer">Important: the default engine is procedural and runs without a paid API. Optional Ollama adds real local model reasoning and image understanding, but does not magically train a new text-to-3D foundation model. High-fidelity neural mesh reconstruction requires a separate GPU inference backend.</p><button class="primary-small" id="got-it" type="button">Got it</button></dialog>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

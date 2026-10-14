@@ -1,0 +1,588 @@
+{
+  "version": "1.4.2",
+  "title": "Forge3D prompt-routing stress report",
+  "totalCases": 34,
+  "passed": 34,
+  "failed": 0,
+  "note": "Logic report only; the local Three.js-compatible test shim was used because the npm registry could not be reached. Does not claim production browser-render verification.",
+  "cases": [
+    {
+      "prompt": "a tall human wearing glasses and carrying a flag",
+      "detectedSubject": "human",
+      "expectedCategory": "character",
+      "actualCategory": "character",
+      "expectedGeometryMarker": "HumanTorso",
+      "geometryMarkerPresent": true,
+      "parts": 24,
+      "triangles": 468,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a robot with a human face and sword",
+      "detectedSubject": "robot",
+      "expectedCategory": "character",
+      "actualCategory": "character",
+      "expectedGeometryMarker": "TorsoShell",
+      "geometryMarkerPresent": true,
+      "parts": 30,
+      "triangles": 483,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a medieval knight with dragon-shaped shield",
+      "detectedSubject": "knight",
+      "expectedCategory": "character",
+      "actualCategory": "character",
+      "expectedGeometryMarker": "HumanTorso",
+      "geometryMarkerPresent": true,
+      "parts": 20,
+      "triangles": 452,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a baby dragon sitting on a treasure chest",
+      "detectedSubject": "dragon",
+      "expectedCategory": "creature",
+      "actualCategory": "creature",
+      "expectedGeometryMarker": "DragonHead",
+      "geometryMarkerPresent": true,
+      "parts": 35,
+      "triangles": 496,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a velociraptor with orange armor",
+      "detectedSubject": "velociraptor",
+      "expectedCategory": "creature",
+      "actualCategory": "creature",
+      "expectedGeometryMarker": "DinoTorso",
+      "geometryMarkerPresent": true,
+      "parts": 20,
+      "triangles": 480,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a corgi wearing a space helmet",
+      "detectedSubject": "corgi",
+      "expectedCategory": "creature",
+      "actualCategory": "creature",
+      "expectedGeometryMarker": "CreatureTorso",
+      "geometryMarkerPresent": true,
+      "parts": 18,
+      "triangles": 440,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a pirate ship with a skull flag",
+      "detectedSubject": "ship",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "Hull",
+      "geometryMarkerPresent": true,
+      "parts": 6,
+      "triangles": 128,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "modern house with tree in front",
+      "detectedSubject": "house",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "BuildingBody",
+      "geometryMarkerPresent": true,
+      "parts": 13,
+      "triangles": 264,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "castle with horse statue",
+      "detectedSubject": "castle",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "BuildingBody",
+      "geometryMarkerPresent": true,
+      "parts": 22,
+      "triangles": 488,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "royal oak desk with a drawer",
+      "detectedSubject": "desk",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "TableTop",
+      "geometryMarkerPresent": true,
+      "parts": 8,
+      "triangles": 208,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "chair with lion emblem",
+      "detectedSubject": "chair",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "SeatCushion",
+      "geometryMarkerPresent": true,
+      "parts": 9,
+      "triangles": 252,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "laptop with phone sticker",
+      "detectedSubject": "laptop",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "LaptopBase",
+      "geometryMarkerPresent": true,
+      "parts": 19,
+      "triangles": 292,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "smartphone with laptop logo",
+      "detectedSubject": "smartphone",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "PhoneBody",
+      "geometryMarkerPresent": true,
+      "parts": 4,
+      "triangles": 92,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "sports car with flag sticker",
+      "detectedSubject": "sports car",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "LowerChassis",
+      "geometryMarkerPresent": true,
+      "parts": 23,
+      "triangles": 476,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a tractor with flower decal",
+      "detectedSubject": "tractor",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "TractorChassis",
+      "geometryMarkerPresent": true,
+      "parts": 16,
+      "triangles": 384,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "a bow with sword engraving",
+      "detectedSubject": "bow",
+      "expectedCategory": "weapon",
+      "actualCategory": "weapon",
+      "expectedGeometryMarker": "BowString",
+      "geometryMarkerPresent": true,
+      "parts": 6,
+      "triangles": 88,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "magic staff topped with dragon",
+      "detectedSubject": "magic staff",
+      "expectedCategory": "weapon",
+      "actualCategory": "weapon",
+      "expectedGeometryMarker": "StaffShaft",
+      "geometryMarkerPresent": true,
+      "parts": 5,
+      "triangles": 144,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "gun with rocket logo",
+      "detectedSubject": "gun",
+      "expectedCategory": "weapon",
+      "actualCategory": "weapon",
+      "expectedGeometryMarker": "GunReceiver",
+      "geometryMarkerPresent": true,
+      "parts": 8,
+      "triangles": 204,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "shield with human emblem",
+      "detectedSubject": "shield",
+      "expectedCategory": "weapon",
+      "actualCategory": "weapon",
+      "expectedGeometryMarker": "ShieldFace",
+      "geometryMarkerPresent": true,
+      "parts": 6,
+      "triangles": 136,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "sign with flag graphic",
+      "detectedSubject": "sign",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "SignPost",
+      "geometryMarkerPresent": true,
+      "parts": 6,
+      "triangles": 136,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "flag with human graphic",
+      "detectedSubject": "flag",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "FlagField",
+      "geometryMarkerPresent": true,
+      "parts": 5,
+      "triangles": 120,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "green mushroom",
+      "detectedSubject": "mushroom",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "GillRing",
+      "geometryMarkerPresent": true,
+      "parts": 8,
+      "triangles": 236,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "red apple in mug",
+      "detectedSubject": "apple",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "FoodBody",
+      "geometryMarkerPresent": true,
+      "parts": 3,
+      "triangles": 104,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "wooden baseball bat",
+      "detectedSubject": "baseball bat",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "BatHandle",
+      "geometryMarkerPresent": true,
+      "parts": 3,
+      "triangles": 80,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "fountain with small dragon statue",
+      "detectedSubject": "fountain",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "FountainPlinth",
+      "geometryMarkerPresent": true,
+      "parts": 8,
+      "triangles": 232,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "handheld gravimetric analyzer with flag logos",
+      "detectedSubject": "gravimetric analyzer",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "DeviceChassis",
+      "geometryMarkerPresent": true,
+      "parts": 16,
+      "triangles": 320,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "quantum garden spool with orange lights",
+      "detectedSubject": "quantum garden spool",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "SpoolCore",
+      "geometryMarkerPresent": true,
+      "parts": 9,
+      "triangles": 180,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "self-folding transport pod",
+      "detectedSubject": "self-folding transport pod",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "PodHull",
+      "geometryMarkerPresent": true,
+      "parts": 11,
+      "triangles": 340,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "horse-shaped carousel with flags",
+      "detectedSubject": "carousel",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "CarouselMast",
+      "geometryMarkerPresent": true,
+      "parts": 23,
+      "triangles": 472,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "gold ring with tiny sword charm",
+      "detectedSubject": "ring",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "RingBand",
+      "geometryMarkerPresent": true,
+      "parts": 3,
+      "triangles": 168,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "rocket launcher on a tank",
+      "detectedSubject": "rocket launcher",
+      "expectedCategory": "weapon",
+      "actualCategory": "weapon",
+      "expectedGeometryMarker": "LauncherFrame",
+      "geometryMarkerPresent": true,
+      "parts": 9,
+      "triangles": 212,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "coffee mug with spaceship logo",
+      "detectedSubject": "mug",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "CupBody",
+      "geometryMarkerPresent": true,
+      "parts": 6,
+      "triangles": 200,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "build an old wooden windmill next to a house",
+      "detectedSubject": "windmill",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "WindmillTower",
+      "geometryMarkerPresent": true,
+      "parts": 8,
+      "triangles": 143,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    },
+    {
+      "prompt": "build a futuristic vending machine with a giant screen and two glowing buttons",
+      "detectedSubject": "vending machine",
+      "expectedCategory": "prop",
+      "actualCategory": "prop",
+      "expectedGeometryMarker": "DeviceChassis",
+      "geometryMarkerPresent": true,
+      "parts": 12,
+      "triangles": 240,
+      "checks": {
+        "category": true,
+        "requiredPart": true,
+        "triangleBudget": true,
+        "geometryAudit": true
+      },
+      "passed": true
+    }
+  ]
+}
